@@ -38,6 +38,8 @@ function playRound(humanChoice, computerChoice) {
 	} else if (humanChoice === "rock" && computerChoice === "paper") {
 		console.log("You lose! Paper beats Rock");
 		computerScore++;
+	} else {
+		console.log("A draw! What a surprise");
 	}
 }
 
@@ -48,7 +50,14 @@ function playGame() {
 
 		playRound(humanChoice, computerChoice);
 	}
-	console.log(humanScore > computerScore ? "Human wins!" : "Computer wins!");
+
+	console.log(
+		humanScore > computerScore
+			? "Human wins!"
+			: humanScore === computerScore
+			? "A draw!"
+			: "Computer wins!"
+	);
 }
 
 // paper wins rock; rock wins scissors; scissors wins paper;
