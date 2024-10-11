@@ -19,26 +19,23 @@ function getHumanChoice() {
 	}
 }
 
+function chooseWinner(winner, looser, message) {
+	if (winner === "rock" && looser === "scissors") {
+		console.log(`${message} Rock beats Scissors`);
+		winner++;
+	} else if (winner === "scissors" && looser === "paper") {
+		console.log(`${message} Scissors beats Paper`);
+		winner++;
+	} else if (winner === "paper" && looser === "rock") {
+		console.log(`${message} Paper beats Rock`);
+		winner++;
+	}
+}
+
 function playRound(humanChoice, computerChoice) {
-	if (humanChoice === "rock" && computerChoice === "scissors") {
-		console.log("You win! Rock beats Scissors");
-		humanScore++;
-	} else if (humanChoice === "scissors" && computerChoice === "paper") {
-		console.log("You win! Scissors beats Paper");
-		humanScore++;
-	} else if (humanChoice === "paper" && computerChoice === "rock") {
-		console.log("You win! Paper beats Rock");
-		humanScore++;
-	} else if (humanChoice === "scissors" && computerChoice === "rock") {
-		console.log("You lose! Rock beats Scissors");
-		computerScore++;
-	} else if (humanChoice === "paper" && computerChoice === "scissors") {
-		console.log("You lose! Scissors beats Paper");
-		computerScore++;
-	} else if (humanChoice === "rock" && computerChoice === "paper") {
-		console.log("You lose! Paper beats Rock");
-		computerScore++;
-	} else {
+	chooseWinner(humanChoice, computerChoice, "You win!");
+	chooseWinner(computerChoice, humanChoice, "You lose!");
+	if (computerChoice === humanChoice) {
 		console.log("A draw! What a surprise");
 	}
 }
