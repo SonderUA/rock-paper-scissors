@@ -1,6 +1,12 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const winningConditions = {
+	rock: "scissors",
+	scissors: "paper",
+	paper: "rock",
+};
+
 function getComputerChoice() {
 	return ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
 }
@@ -19,22 +25,22 @@ function getHumanChoice() {
 	}
 }
 
-function chooseWinner(winner, looser, message) {
-	if (winner === "rock" && looser === "scissors") {
-		console.log(`${message} Rock beats Scissors`);
-		winner++;
-	} else if (winner === "scissors" && looser === "paper") {
-		console.log(`${message} Scissors beats Paper`);
-		winner++;
-	} else if (winner === "paper" && looser === "rock") {
-		console.log(`${message} Paper beats Rock`);
-		winner++;
+function showWinner(winner, looser, humanIsWinner = true) {
+	if (winningConditions[winner] === looser) {
+		console.log(
+			`${humanIsWinner ? "You win!" : "You lose!"} ${
+				winner.charAt(0).toUpperCase() + winner.slice(1) // Capitalize winner's choice
+			} beats ${looser}`
+		);
+		humanIsWinner ? humanScore++ : computerScore++;
 	}
 }
 
 function playRound(humanChoice, computerChoice) {
-	chooseWinner(humanChoice, computerChoice, "You win!");
-	chooseWinner(computerChoice, humanChoice, "You lose!");
+	// Check if the user won the round
+	showWinner(humanChoice, computerChoice);
+	// Check if the computer won the round
+	showWinner(computerChoice, humanChoice, (humanIsWinner = false));
 	if (computerChoice === humanChoice) {
 		console.log("A draw! What a surprise");
 	}
@@ -56,5 +62,3 @@ function playGame() {
 			: "Computer wins!"
 	);
 }
-
-// paper wins rock; rock wins scissors; scissors wins paper;
