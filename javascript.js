@@ -48,7 +48,11 @@ function playRound(humanChoice, computerChoice) {
 
 function playGame() {
 	for (let i = 0; i < 5; i++) {
-		let humanChoice = getHumanChoice();
+		let humanChoice;
+		do {
+			humanChoice = getHumanChoice();
+		} while (humanChoice === null);
+
 		let computerChoice = getComputerChoice();
 
 		playRound(humanChoice, computerChoice);
